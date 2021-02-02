@@ -1,6 +1,7 @@
 package examenordinaria;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Bidder implements Observer {
     
@@ -24,12 +25,12 @@ public class Bidder implements Observer {
             System.out.println("No puede introducir una nueva puja porque es usted quien ha realizado la puja máxima actual");
         
         }else{
+            System.out.println( this.getUserName() + ": Ha realizado una puja para " + p.getProductName() + " por valor de " + d + "€");
             p.addBid(this,d);
             productBidded.add(p);
-            System.out.println( this.getUserName() + ": Ha realizado una puja para " + p.getProductName() + " por valor de " + d + "€");
+            
         }
     }
-    
     @Override
     public String getUserName(){
         return this.username;
@@ -38,7 +39,16 @@ public class Bidder implements Observer {
     public ArrayList<Product> getProductBidded(){
         return this.productBidded;
     }
-
+    
+    public void printProducts(){
+        for(Iterator<Product> it = this.getProductBidded().iterator(); it.hasNext();){
+            Product actual = it.next();
+            System.out.println(actual.getProductName() + ": " + '\t' + actual.getProductDescription() +"." + " Puja más alta actual: " + 
+                                    actual.getHigerBid().getBidAmount() + "€ realizada por " + actual.getHigerBid().getObserver().getUserName());
+            
+            
+        }
+    }
 
     
 }

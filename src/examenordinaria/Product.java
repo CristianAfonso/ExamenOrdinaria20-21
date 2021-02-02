@@ -67,7 +67,8 @@ public class Product implements Subject{
     }
     public void printBids(){
         for(Iterator<Bid> it = this.getBidList().iterator(); it.hasNext();){
-            System.out.println(it.next().toString());
+            Bid actual = it.next();
+            System.out.println(actual.getObserver().getUserName() + '\t' +": "+ actual.getBidAmount());
         }
     }
     
