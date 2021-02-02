@@ -32,7 +32,10 @@ public class Product implements Subject{
     @Override
     public void notifyObservers() {
         for (Iterator<String> it = observerList.keySet().iterator(); it.hasNext();) {
-            observerList.get(it.next()).update(this.higherBid);
+            String actual = it.next();
+            if(!observerList.get(actual).equals(this.higherBid.getObserver())){
+                observerList.get(actual).update(this.higherBid);
+            }
         }
     }
     @Override
