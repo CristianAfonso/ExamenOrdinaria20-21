@@ -26,7 +26,7 @@ public class Product implements Subject{
     
     @Override
     public void addObserver(Observer o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        observerList.put(o.getUserName(), o);
     }
 
     @Override
@@ -41,9 +41,13 @@ public class Product implements Subject{
     @Override
     public void addBid(Observer b, double d) {
         this.higherBid = new Bid(b, d);
-        observerList.put(b.getUserName(), b);
+        this.addObserver(b);
         bidList.add(higherBid);
         this.notifyObservers();
+    }
+    
+    public void setPhoto(String photo){
+        this.productImages.add(photo);      //Hago referencia a las fotos como si fueran strings, con mas tiempo de implementación y si fuera requerido las hubiera añadido como tal.
     }
     
     public Bid getHigerBid() {
@@ -62,11 +66,12 @@ public class Product implements Subject{
         return this.initialBid;
     }
     
-    public void registerFoto(String s){
-        this.productImages.add(s);
-    }
     public ArrayList<Bid> getBidList(){
         return this.bidList;
+    }
+    
+    public ArrayList<String> getPhotoList(){
+        return this.productImages;
     }
     public void printBids(){
         for(Iterator<Bid> it = this.getBidList().iterator(); it.hasNext();){
