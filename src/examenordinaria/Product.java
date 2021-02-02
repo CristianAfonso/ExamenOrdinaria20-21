@@ -22,8 +22,6 @@ public class Product implements Subject{
         this.addBid(higherBid.getObserver(),higherBid.getBidAmount());
     }
     
-    
-    
     @Override
     public void addObserver(Observer o) {
         observerList.put(o.getUserName(), o);

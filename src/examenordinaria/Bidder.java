@@ -8,14 +8,20 @@ public class Bidder implements Observer {
     private String username;
     private ArrayList<Product> productBidded = new ArrayList<>();
     
-    public Bidder(String username){
+    public Bidder(String username, AuctionList aL){
         this.username = username;
+        this.logIn(aL);
     }
     
     @Override
     public void update(Bid b) {
         System.out.println("---" + this.username + "---");
         System.out.println(" El pujador " + b.getObserver().getUserName() + " ha realizado una puja por valor de " + b.getBidAmount() + "€");
+    }
+    
+    public void logIn(AuctionList aL){
+        System.out.println("Bienvenido " + this.username + " estas son las subastas que hay ahora mismo en marcha: ");
+        aL.printList();
     }
     
     public void makeBid(Product p, double d){
